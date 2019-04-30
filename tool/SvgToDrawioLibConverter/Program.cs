@@ -28,8 +28,7 @@ namespace SvgToDrawioLibConverter
                 Console.WriteLine($"Exception: '{ex.Message}'");
                 Console.WriteLine($"StackTrace: '{ex.StackTrace}'");
             }
-            Console.WriteLine("Press any key...");
-            Console.ReadLine();
+            Console.WriteLine("Done");
         }
 
         private static void GenerateDrawioLibraries()

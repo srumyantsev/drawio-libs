@@ -1,4 +1,4 @@
-﻿namespace DrawioFontAwesomeLibraryTool
+﻿namespace SvgToDrawioLibConverter
 {
     public class Settings
     {

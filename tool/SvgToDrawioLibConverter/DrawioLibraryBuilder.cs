@@ -4,7 +4,7 @@ using System.IO;
 using System.Text;
 using System.Xml.Linq;
 
-namespace DrawioFontAwesomeLibraryTool
+namespace SvgToDrawioLibConverter
 {
     public static class DrawioLibraryBuilder
     {

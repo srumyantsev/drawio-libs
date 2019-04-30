@@ -24,6 +24,7 @@ namespace SvgToDrawioLibConverter
                 GenerateDrawioLibraries();
             } catch (Exception ex)
             {
+                Console.WriteLine($"CRITICAL ERROR");
                 Console.WriteLine($"Exception: '{ex.Message}'");
                 Console.WriteLine($"StackTrace: '{ex.StackTrace}'");
             }
@@ -38,20 +39,29 @@ namespace SvgToDrawioLibConverter
             {
                 Console.WriteLine($"Generating library '{libraryInput.Title}'");
 
-                string mxLibrary = DrawioLibraryBuilder.Build(new DrawioLibraryBuilder.Model
+                try
                 {
-                    LibraryTitle = libraryInput.Title,
-                    SvgFilePaths = Directory.EnumerateFiles(libraryInput.SvgsFolder, SvgExtension),
-                    AddStyleElement = libraryInput.AddStyleElement
-                });
+                    string mxLibrary = DrawioLibraryBuilder.Build(new DrawioLibraryBuilder.Model
+                    {
+                        LibraryTitle = libraryInput.Title,
+                        SvgFilePaths = Directory.EnumerateFiles(libraryInput.SvgsFolder, SvgExtension),
+                        AddStyleElement = libraryInput.AddStyleElement
+                    });
 
-                string drawioLibraryPath = Path.Combine(Settings.OutputFolder, $"{libraryInput.Title}{DrawioLibraryNameExtension}");
-                Console.WriteLine($"Writing library '{drawioLibraryPath}'");
-                if (!Directory.Exists(Path.GetDirectoryName(drawioLibraryPath)))
-                {
-                    Directory.CreateDirectory(Path.GetDirectoryName(drawioLibraryPath));
+                    string drawioLibraryPath = Path.Combine(Settings.OutputFolder, $"{libraryInput.Title}{DrawioLibraryNameExtension}");
+                    Console.WriteLine($"Writing library '{drawioLibraryPath}'");
+                    if (!Directory.Exists(Path.GetDirectoryName(drawioLibraryPath)))
+                    {
+                        Directory.CreateDirectory(Path.GetDirectoryName(drawioLibraryPath));
+                    }
+                    File.WriteAllText(drawioLibraryPath, mxLibrary);
                 }
-                File.WriteAllText(drawioLibraryPath, mxLibrary);
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"Failed process '{libraryInput.Title}'");
+                    Console.WriteLine($"Exception: '{ex.Message}'");
+                    Console.WriteLine($"StackTrace: '{ex.StackTrace}'");
+                }                
             }
         }
     }

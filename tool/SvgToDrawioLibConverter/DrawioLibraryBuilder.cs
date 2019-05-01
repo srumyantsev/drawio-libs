@@ -71,8 +71,22 @@ namespace SvgToDrawioLibConverter
             processedSvgSb.Append("\",");
 
             processedSvgSb.Append($"\"title\":\"{svgFileName}\"");
+
+            XAttribute viewBoxAttribute = svgXml.Root.Attribute("viewBox");
+            const double imageWidth = 100;
+            double imageHeight = 100;
+            if (viewBoxAttribute != null && !string.IsNullOrEmpty(viewBoxAttribute.Value))
+            {
+                string[] viewBoxAttributeValue = viewBoxAttribute.Value.Split(" ");
+                if (viewBoxAttributeValue.Length == 4 && double.TryParse(viewBoxAttributeValue[2], out double originalImageWidth) && double.TryParse(viewBoxAttributeValue[3], out double originalImageHeight))
+                {
+                    double aspectRatio = originalImageWidth / originalImageHeight;
+                    imageHeight = imageWidth / aspectRatio;
+                }
+            }
+
             //append common properties
-            processedSvgSb.Append(", \"w\":100,\"h\":100");
+            processedSvgSb.Append($", \"w\":{(int)imageWidth},\"h\":{(int)imageHeight}");
             processedSvgSb.Append("},");
             return processedSvgSb;
         }

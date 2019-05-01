@@ -24,9 +24,9 @@ namespace SvgToDrawioLibConverter
                 }
                 catch (Exception ex)
                 {
-                    Console.WriteLine($"Failed process '{svgFilePath}'");
-                    Console.WriteLine($"Exception: '{ex.Message}'");
-                    Console.WriteLine($"StackTrace: '{ex.StackTrace}'");
+                    Console.Error.WriteLine($"Failed process '{svgFilePath}'");
+                    Console.Error.WriteLine($"Exception: '{ex.Message}'");
+                    Console.Error.WriteLine($"StackTrace: '{ex.StackTrace}'");
                 }
             }
             mxLibrarySb.Remove(mxLibrarySb.Length - 1, 1);

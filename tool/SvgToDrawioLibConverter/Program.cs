@@ -24,9 +24,9 @@ namespace SvgToDrawioLibConverter
                 GenerateDrawioLibraries();
             } catch (Exception ex)
             {
-                Console.WriteLine($"CRITICAL ERROR");
-                Console.WriteLine($"Exception: '{ex.Message}'");
-                Console.WriteLine($"StackTrace: '{ex.StackTrace}'");
+                Console.Error.WriteLine($"CRITICAL ERROR");
+                Console.Error.WriteLine($"Exception: '{ex.Message}'");
+                Console.Error.WriteLine($"StackTrace: '{ex.StackTrace}'");                
             }
             Console.WriteLine("Done");
         }
@@ -57,9 +57,9 @@ namespace SvgToDrawioLibConverter
                 }
                 catch (Exception ex)
                 {
-                    Console.WriteLine($"Failed process '{libraryInput.Title}'");
-                    Console.WriteLine($"Exception: '{ex.Message}'");
-                    Console.WriteLine($"StackTrace: '{ex.StackTrace}'");
+                    Console.Error.WriteLine($"Failed process '{libraryInput.Title}'");
+                    Console.Error.WriteLine($"Exception: '{ex.Message}'");
+                    Console.Error.WriteLine($"StackTrace: '{ex.StackTrace}'");
                 }                
             }
         }
